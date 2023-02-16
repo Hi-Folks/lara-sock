@@ -11,11 +11,14 @@ class Dispatcher
 {
     private Server $server;
 
+    private array $serverConfiguration;
+
     private WebSocketHandlerInterface $handler;
 
     public function __construct($host, $port)
     {
         $this->server = new Server($host, $port, \SWOOLE_PROCESS, \SWOOLE_SOCK_TCP /*| \SWOOLE_SSL */);
+        $this->serverConfiguration = [];
     }
 
     public function setWebSocketHandler(WebSocketHandlerInterface $handler)
@@ -40,6 +43,10 @@ class Dispatcher
         $this->server->on('disconnect', function (Server $server, int $fd) {
             $this->handler->onDisconnect($server, $fd);
         });
+    }
+
+    public function setPingFrame()
+    {
     }
 
     public function start()

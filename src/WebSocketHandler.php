@@ -12,7 +12,7 @@ class WebSocketHandler implements WebSocketHandlerInterface
 {
     private $logger;
 
-    private Channels $channels;
+    private readonly Channels $channels;
 
     public function __construct()
     {

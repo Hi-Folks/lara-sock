@@ -6,13 +6,12 @@ use Illuminate\Support\Arr;
 
 class Channels
 {
-    const DEFAULT_CHANNEL_NAME = 'default';
+    final const DEFAULT_CHANNEL_NAME = 'default';
 
-    private array $channels;
+    private array $channels = [];
 
     public function __construct()
     {
-        $this->channels = [];
         $this->createChannel(self::DEFAULT_CHANNEL_NAME);
     }
 

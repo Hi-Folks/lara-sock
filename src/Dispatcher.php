@@ -9,16 +9,15 @@ use Swoole\WebSocket\Server;
 
 class Dispatcher
 {
-    private Server $server;
+    private readonly Server $server;
 
-    private array $serverConfiguration;
+    private array $serverConfiguration = [];
 
     private WebSocketHandlerInterface $handler;
 
     public function __construct($host, $port)
     {
         $this->server = new Server($host, $port, \SWOOLE_PROCESS, \SWOOLE_SOCK_TCP /*| \SWOOLE_SSL */);
-        $this->serverConfiguration = [];
     }
 
     public function setWebSocketHandler(WebSocketHandlerInterface $handler)

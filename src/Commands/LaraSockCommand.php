@@ -22,7 +22,7 @@ class LaraSockCommand extends Command
 
     public $description = 'Start WebSocket Server';
 
-    private WebSocketHandlerInterface $handler;
+    private readonly WebSocketHandlerInterface $handler;
 
     protected function getOptionWithFallbacks(string $key, $default = '')
     {

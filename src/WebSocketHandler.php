@@ -63,7 +63,7 @@ class WebSocketHandler implements WebSocketHandlerInterface
 
     private function broadcastMessage($data, $server, $fd)
     {
-        $sender = $this->channels->getChannel()->get(strval($fd), 'name');
+        $sender = $this->channels->getChannel()->get((string) $fd, 'name');
         foreach ($this->channels->getChannel() as $key => $value) {
             if ($key == $fd) {
                 $server->push($fd, 'Message sent');

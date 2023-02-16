@@ -15,7 +15,7 @@ class Channels
         $this->createChannel(self::DEFAULT_CHANNEL_NAME);
     }
 
-    public function createChannel($name)
+    public function createChannel($name): bool
     {
         if (Arr::exists($this->channels, $name)) {
             // error
@@ -44,7 +44,7 @@ class Channels
         $clientName = sprintf("Client-%'.06d\n", $fd);
         $data = [
             'fd' => $fd,
-            'name' => sprintf($clientName),
+            'name' => $clientName,
         ];
         $this->channels[$channelName]->set($fd, $data);
 

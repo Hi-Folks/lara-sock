@@ -20,36 +20,49 @@ class Dispatcher
         $this->server = new Server($host, $port, \SWOOLE_PROCESS, \SWOOLE_SOCK_TCP /*| \SWOOLE_SSL */);
     }
 
-    public function setWebSocketHandler(WebSocketHandlerInterface $handler)
+    public function setWebSocketHandler(WebSocketHandlerInterface $handler): void
     {
         $this->handler = $handler;
     }
 
-    private function registerEvents()
+    private function registerEvents(): void
     {
-        $this->server->on('Start', function (Server $server) {
+        $this->server->on('Start', function (Server $server): void {
             $this->handler->onStart($server);
         });
-        $this->server->on('message', function (Server $server, Frame $frame) {
+        $this->server->on('message', function (Server $server, Frame $frame): void {
             $this->handler->onMessage($server, $frame);
         });
-        $this->server->on('open', function (Server $server, Request $request) {
+        $this->server->on('open', function (Server $server, Request $request): void {
             $this->handler->onOpen($server, $request);
         });
-        $this->server->on('close', function (Server $server, int $fd) {
+        $this->server->on('close', function (Server $server, int $fd): void {
             $this->handler->onClose($server, $fd);
         });
-        $this->server->on('disconnect', function (Server $server, int $fd) {
+        $this->server->on('disconnect', function (Server $server, int $fd): void {
             $this->handler->onDisconnect($server, $fd);
         });
     }
 
-    public function setPingFrame()
+    public function setPingFrame(): void
     {
     }
 
-    public function start()
+    public function serverConfiguration(): void
     {
+        if ($this->serverConfiguration !== []) {
+            $this->server->set($this->serverConfiguration);
+        }
+    }
+
+    public function setCompression(): void
+    {
+        $this->serverConfiguration['websocket_compression'] = true;
+    }
+
+    public function start(): void
+    {
+        $this->serverConfiguration();
         $this->registerEvents();
         $this->server->start();
     }

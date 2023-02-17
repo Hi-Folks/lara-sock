@@ -19,12 +19,12 @@ class WebSocketHandler implements WebSocketHandlerInterface
         $this->channels = new Channels();
     }
 
-    public function setLogger($logger)
+    public function setLogger($logger): void
     {
         $this->logger = $logger;
     }
 
-    public function onOpen(Server $server, Request $request)
+    public function onOpen(Server $server, Request $request): void
     {
         $fd = $request->fd;
 
@@ -32,12 +32,12 @@ class WebSocketHandler implements WebSocketHandlerInterface
         $this->logger->info("Connection <{$subscriber['fd']}> open by {$subscriber['name']}. Total connections: ".$this->channels->totalSubscribers());
     }
 
-    public function onStart(Server $server)
+    public function onStart(Server $server): void
     {
         $this->logger->info(__METHOD__);
     }
 
-    public function onMessage(Server $server, Frame $frame)
+    public function onMessage(Server $server, Frame $frame): void
     {
         $opcode = $frame->opcode;
         switch ($opcode) {
@@ -61,7 +61,7 @@ class WebSocketHandler implements WebSocketHandlerInterface
         }
     }
 
-    private function broadcastMessage($data, $server, $fd)
+    private function broadcastMessage($data, Server $server, $fd): void
     {
         $sender = $this->channels->getChannel()->get((string) $fd, 'name');
         foreach ($this->channels->getChannel() as $key => $value) {
@@ -73,21 +73,21 @@ class WebSocketHandler implements WebSocketHandlerInterface
         }
     }
 
-    public function onClose(Server $server, int $fd)
+    public function onClose(Server $server, int $fd): void
     {
         $this->logger->info(__METHOD__);
         $this->channels->removeSubscriber($fd);
     }
 
-    public function onDisconnect(Server $server, int $fd)
+    public function onDisconnect(Server $server, int $fd): void
     {
         $this->logger->info(__METHOD__);
         $this->channels->removeSubscriber($fd);
     }
 
-    private function sendPong(Server $server, int $fd)
+    private function sendPong(Server $server, int $fd): void
     {
-        $pongFrame = new OpenSwoole\WebSocket\Frame;
+        $pongFrame = new Frame;
         $pongFrame->opcode = \WEBSOCKET_OPCODE_PONG;
 
         // Push response of pong to client using a frame object

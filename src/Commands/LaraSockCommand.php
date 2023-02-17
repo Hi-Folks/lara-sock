@@ -2,7 +2,6 @@
 
 namespace HiFolks\LaraSock\Commands;
 
-use HiFolks\LaraSock\Contracts\WebSocketHandlerInterface;
 use HiFolks\LaraSock\Dispatcher;
 use HiFolks\LaraSock\WebSocketHandler;
 use Illuminate\Console\Command;
@@ -21,8 +20,6 @@ class LaraSockCommand extends Command
         ';
 
     public $description = 'Start WebSocket Server';
-
-    private readonly WebSocketHandlerInterface $handler;
 
     protected function getOptionWithFallbacks(string $key, $default = '')
     {
@@ -60,7 +57,7 @@ class LaraSockCommand extends Command
         $this->line('<fg=gray> '.
             $this->getDescription().' </>');
         $dispatcher = new Dispatcher($host, $port);
-
+        $dispatcher->setCompression();
         //$server = new Server($address, $port);
         $logChannel = Log::channel($this->getLogChannel());
         $handler = new WebSocketHandler();

@@ -8,7 +8,7 @@ use Illuminate\Support\ServiceProvider;
 
 class LaraSockServiceProvider extends ServiceProvider
 {
-    public function boot()
+    public function boot(): void
     {
         $engine = match (true) {
             extension_loaded('swoole') => '<fg=green;options=bold>Swoole</>',
@@ -17,7 +17,7 @@ class LaraSockServiceProvider extends ServiceProvider
         };
 
         AboutCommand::add('LaraSock',
-            fn () => [
+            fn (): array => [
                 'Version' => \Composer\InstalledVersions::getPrettyVersion('hi-folks/lara-sock'),
                 'WebSocket engine' => $engine,
             ]);
@@ -38,25 +38,10 @@ class LaraSockServiceProvider extends ServiceProvider
         //});
     }
 
-    public function register()
+    public function register(): void
     {
         $this->mergeConfigFrom(
             __DIR__.'/../config/lara-sock.php', 'lara-socks'
         );
-    }
-
-    public function configurePackage(Package $package): void
-    {
-        /*
-         * This class is a Package Service Provider
-         *
-         * More info: https://github.com/spatie/laravel-package-tools
-         */
-        $package
-            ->name('lara-sock')
-            ->hasConfigFile()
-            ->hasViews()
-            ->hasMigration('create_lara-sock_table')
-            ->hasCommand(LaraSockCommand::class);
     }
 }

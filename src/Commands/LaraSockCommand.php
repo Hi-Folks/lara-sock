@@ -7,9 +7,6 @@ use HiFolks\LaraSock\WebSocketHandler;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
-use Swoole\Http\Request;
-use Swoole\WebSocket\Frame;
-use Swoole\WebSocket\Server;
 
 class LaraSockCommand extends Command
 {
@@ -58,41 +55,12 @@ class LaraSockCommand extends Command
             $this->getDescription().' </>');
         $dispatcher = new Dispatcher($host, $port);
         $dispatcher->setCompression();
-        //$server = new Server($address, $port);
+
         $logChannel = Log::channel($this->getLogChannel());
         $handler = new WebSocketHandler();
         $handler->setLogger($logChannel);
         $dispatcher->setWebSocketHandler($handler);
-        $logChannel->info('Starting');
         $dispatcher->start();
-
-        /*
-        $server->on('start', function (Server $server) {
-            $this->components->twoColumnDetail(
-                '<fg=white;options=bold>Swoole WebSocket Server</>',
-                '<fg=green;options=bold>Started</>'
-            );
-            $this->components->twoColumnDetail('WebSocket listening to address', $server->host);
-            $this->components->twoColumnDetail('WebSocket listening to port', $server->port);
-        });
-
-        $server->on('Open', function (Server $server, Request $request) {
-            $this->line("New connection {$request->fd}");
-            $this->handler->onOpen($server, $request);
-        });
-
-        $server->on('Message', function (Server $server, Frame $frame) {
-            $this->line("Received message from {$frame->fd}");
-        });
-        $server->on('Close', function (Server $server, int $fd) {
-            $this->line("Connection close by: {$fd}");
-        });
-        $server->on('Disconnect', function (Server $server, int $fd) {
-            $this->line("Disconnection from: {$fd}");
-        });
-
-        $server->start();
-        */
 
         return self::SUCCESS;
     }

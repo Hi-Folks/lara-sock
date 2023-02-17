@@ -8,7 +8,6 @@ use Swoole\Http\Request;
 use Swoole\WebSocket\Frame;
 use Swoole\WebSocket\Server;
 
-
 class WebSocketHandler implements WebSocketHandlerInterface
 {
     private $logger;
@@ -36,6 +35,9 @@ class WebSocketHandler implements WebSocketHandlerInterface
     public function onStart(Server $server): void
     {
         $this->logger->info(__METHOD__);
+        $server->tick(10_000, function (): void {
+            $this->logger->info('Memory usage: '.memory_get_usage());
+        });
     }
 
     public function onMessage(Server $server, Frame $frame): void

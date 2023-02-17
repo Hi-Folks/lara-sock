@@ -20,22 +20,33 @@ you don't need additional services or external tools to enable the Web Socket fu
 
 ## Installing LaraSock
 
+The LaraSock `hi-folks/lara-sock` is provided as PHP package that you can install
+in your Laravel project.
+To install the package you can use `composer require`:
 ```bash
 composer require hi-folks/lara-sock
 ```
 
-Ehi, the package is not yet release, so if you want to try it, you have to fork it,
-and in your `composer.json` file :
-```json
+Ehi, **the package is not yet release**, so for now, if you want to try it, before to execute `composer require` you have to clone the repository,
+and in your `composer.json` of your project file :
+```json lines
     "repositories": [
         {
             "type": "path",
             "url": "../lara-sock"
         }
     ]
-
 ```
+and then, be sure that your minimum-stability, in the `composer.json` of your Laravel project is set to `dev`:
+```json lines
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+```
+
 ## Starting the server
+
+Installing the package in your Laravel project, adds a new command in `php artisan`.
+The new `larasock:start` artisan command starts a long live running process that starts a Web Socket server, ready to listen and accept your Web Socket connection from clients.
 
 ```bash
 php artisan larasock:start

@@ -1,7 +1,13 @@
+# LaraSock
+
+
+![CI/CD Github Actions](https://img.shields.io/github/actions/workflow/status/hi-folks/lara-sock/php-code-quality.yml?style=for-the-badge)
+![GitHub last commit](https://img.shields.io/github/last-commit/hi-folks/lara-sock?style=for-the-badge)
+![GitHub Release Date](https://img.shields.io/github/release-date/hi-folks/lara-sock?style=for-the-badge)
+![Packagist PHP Version](https://img.shields.io/packagist/v/hi-folks/lara-sock?style=for-the-badge)
 
 ![LaraSock](lara-sock.png)
 
-# LaraSock
 
 > This is an early stage work in progress, so expect that at the moment, the project doens't implement
 > all the functionalities that you expect. If you want to contribute, providing Pull Request
@@ -70,3 +76,27 @@ you have to "bind" to 0.0.0.0 ip address:
 ```shell
 php artisan larasock:start --host=0.0.0.0
 ```
+
+
+## Contributing
+
+Please see [CONTRIBUTING](CONTRIBUTING.md) for details.
+
+### Submit ideas or feature requests or issues
+
+* Take a look if your request is already there [https://github.com/Hi-Folks/lara-sock/issues](https://github.com/Hi-Folks/lara-sock/issues)
+* If it is not present, you can create a new one [https://github.com/Hi-Folks/lara-sock/issues/new](https://github.com/Hi-Folks/lara-sock/issues/new)
+
+
+## Credits
+
+- [Roberto Butti](https://github.com/roberto-butti)
+- [All Contributors](https://github.com/Hi-Folks/lara-sock/graphs/contributors)
+
+## Who talks about LaraSock
+- [Teasing Tweet](https://twitter.com/RmeetsH/status/1625631431664836608)
+
+
+## License
+
+The MIT License (MIT). Please see [License File](LICENSE.md) for more information.

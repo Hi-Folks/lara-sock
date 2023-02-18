@@ -9,18 +9,18 @@
 ![LaraSock](lara-sock.png)
 
 
-> This is an early stage work in progress, so expect that at the moment, the project doens't implement
-> all the functionalities that you expect. If you want to contribute, providing Pull Request
+> This is an early stage (under costruction/exploration) work in progress, so at the moment, the project doens't implement
+> all the functionalities that you expect. If [you want to contribute](#contributing), providing Pull Request
 >  providing suggestions, feel free to share. We believe in positive vibes.
 
 
 ## Why LaraSock?
 
-Larasock implements a WebSocket Server based on Swoole or Open Swoole.
-The final goal is to support the same Application Providers supported by Laravel Octane.
-So, in this case you can easily add realtime functionalities via WebSocket to your Octane application.
+Larasock implements a WebSocket Server based on Open Swoole.
+The final goal is to support the same Application Providers supported by Laravel Octane (Swoole and Roadrunner).
+This package aims to allow you to easily add realtime functionalities via WebSocket to your Octane application.
 
-So, if you already using Swoole or Open Swoole with your Laravel Octane,
+So, if you are already using Open Swoole with your Laravel Octane,
 you don't need additional services or external tools to enable the Web Socket functionalities.
 
 
@@ -76,7 +76,91 @@ you have to "bind" to 0.0.0.0 ip address:
 ```shell
 php artisan larasock:start --host=0.0.0.0
 ```
+### The client
+Once you started the Web Socket Server, you can start creating your Web client to send and receive messages.
+To do that you can implement your HTML page and using Websocket Javascript class.
 
+```html
+
+<!doctype html>
+<html>
+
+<head>
+    <title> WebSocket with PHP and Open Swoole </title>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@2.50.0/dist/full.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        let echo_service;
+        append = function(text) {
+            document.getElementById("websocket_events").insertAdjacentHTML('afterbegin',
+                "<li class='border-solid border-y-2 border-indigo-400'>" + text + ";</li>"
+            );
+        }
+        window.onload = function() {
+            echo_service = new WebSocket('ws://127.0.0.1:9501');
+            echo_service.onmessage = function(event) {
+                console.log(event.data)
+                append(event.data)
+            }
+            echo_service.onopen = function() {
+                append("Connected to WebSocket!");
+            }
+            echo_service.onclose = function() {
+                append("Connection closed");
+            }
+            echo_service.onerror = function() {
+                append("Error happens");
+            }
+        }
+
+        function sendMessage(event) {
+            console.log(event)
+            let message = document.getElementById("message").value;
+            echo_service.send(message);
+        }
+    </script>
+</head>
+
+<body>
+    <div class=" px-20 py-20" data-theme="acid">
+        Message:
+        <div class="form-control">
+            <div class="input-group">
+                <input id="message" value="Hello!" type="text" placeholder="Search…" class="input input-bordered" />
+                <button class="btn btn-square" onclick="sendMessage(event)">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul class="p-4" id="websocket_events">
+        </ul>
+    </div>
+</body>
+
+</html>
+```
+## A note about the Subprotocol
+
+WebSocket defines a protocol that allows clients and server to exchange data (messages).
+A **Sub**-protocol defines the structure of the exchanged message and the meanings of each field. For example, you want to exchange a pure string with the text message without any additional information. Or you want to exchange data in with a more complex.
+
+At the moment the current implementation of this Proof of Concept exchange messages in string format.
+
+
+## Next Step, evolution of the Proof of Concept
+
+This is just a Proof of Concept the thing that I would like to focus one (and feel free to share any suggestion/feedback/pullrequest):
+
+- Define the structure of the message
+- allow to customize the broadcast method
+- Rest API for showing statistics
+
+The package is under construction, so if you have some suggestion you can:
+- [Write a Feature request](https://github.com/Hi-Folks/lara-sock/issues/new?labels=feature-request&title=%5BFeature+Request%5D%3A++)
+- [Submit a Pull Request](https://github.com/Hi-Folks/lara-sock/pulls)
+- [Write me on Twitter](https://twitter.com/RmeetsH)
 
 ## Contributing
 
@@ -84,9 +168,12 @@ Please see [CONTRIBUTING](CONTRIBUTING.md) for details.
 
 ### Submit ideas or feature requests or issues
 
-* Take a look if your request is already there [https://github.com/Hi-Folks/lara-sock/issues](https://github.com/Hi-Folks/lara-sock/issues)
-* If it is not present, you can create a new one [https://github.com/Hi-Folks/lara-sock/issues/new](https://github.com/Hi-Folks/lara-sock/issues/new)
+The package is under construction, so if you have some suggestion you can:
 
+* Take a look if your request is already there [https://github.com/Hi-Folks/lara-sock/issues](https://github.com/Hi-Folks/lara-sock/issues)
+* If it is not present, you can create a new [feature request](https://github.com/Hi-Folks/lara-sock/issues/new?labels=feature-request&title=%5BFeature+Request%5D%3A++)
+* [Submit a Pull Request](https://github.com/Hi-Folks/lara-sock/pulls)
+* [Write me a message via Twitter](https://twitter.com/RmeetsH)
 
 ## Credits
 

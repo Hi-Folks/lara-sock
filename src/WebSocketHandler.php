@@ -71,7 +71,9 @@ class WebSocketHandler implements WebSocketHandlerInterface
             if ($key == $fd) {
                 $server->push($fd, 'Message sent');
             } else {
-                $server->push($key, "FROM: {$sender} - MESSAGE: ".$data);
+                //$server->push($key, "FROM: {$sender} - MESSAGE: ".$data);
+                //dd($data);
+                $server->push($key, $data);
             }
         }
     }

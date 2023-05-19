@@ -8,6 +8,8 @@ use Swoole\Http\Request;
 use Swoole\WebSocket\Frame;
 use Swoole\WebSocket\Server;
 
+//use OpenSwoole\WebSocket\Server;
+
 class WebSocketHandler implements WebSocketHandlerInterface
 {
     private $logger;
@@ -66,7 +68,7 @@ class WebSocketHandler implements WebSocketHandlerInterface
 
     private function broadcastMessage($data, Server $server, $fd): void
     {
-        $sender = $this->channels->getChannel()->get((string) $fd, 'name');
+        $this->channels->getChannel()->get((string) $fd, 'name');
         foreach ($this->channels->getChannel() as $key => $value) {
             if ($key == $fd) {
                 $server->push($fd, 'Message sent');

@@ -1,12 +1,12 @@
 # LaraSock
 
 
-![CI/CD Github Actions](https://img.shields.io/github/actions/workflow/status/hi-folks/lara-sock/php-code-quality.yml?style=for-the-badge)
-![GitHub last commit](https://img.shields.io/github/last-commit/hi-folks/lara-sock?style=for-the-badge)
-![GitHub Release Date](https://img.shields.io/github/release-date/hi-folks/lara-sock?style=for-the-badge)
+[![CI/CD Github Actions](https://img.shields.io/github/actions/workflow/status/hi-folks/lara-sock/php-code-quality.yml?style=for-the-badge)](https://github.com/Hi-Folks/lara-sock/actions)
+[![GitHub last commit](https://img.shields.io/github/last-commit/hi-folks/lara-sock?style=for-the-badge)](https://github.com/Hi-Folks/lara-sock/commits/main)
+[![GitHub Release Date](https://img.shields.io/github/release-date/hi-folks/lara-sock?style=for-the-badge)](https://github.com/Hi-Folks/lara-sock/releases)
 [![Packagist PHP Version](https://img.shields.io/packagist/v/hi-folks/lara-sock?style=for-the-badge)](https://packagist.org/packages/hi-folks/lara-sock)
 
-![LaraSock](lara-sock.png)
+[![LaraSock](lara-sock.png)](https://github.com/Hi-Folks/lara-sock)
 
 
 > This is an early stage (under construction/exploration) work in progress, so currently, the project only implements some of the functionalities you expect. Feel free to share if you [want to contribute](CONTRIBUTING.md), providing Pull Request or

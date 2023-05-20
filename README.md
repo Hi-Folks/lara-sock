@@ -26,28 +26,13 @@ you don't need additional services or external tools to enable the Web Socket fu
 
 ## Installing LaraSock
 
-The LaraSock `hi-folks/lara-sock` is provided as PHP package that you can install
-in your Laravel project.
+The LaraSock `hi-folks/lara-sock` is provided as PHP package that you can install in your Laravel project.
 To install the package you can use `composer require`:
+
 ```bash
 composer require hi-folks/lara-sock
 ```
 
-Ehi, **the package is not yet release**, so for now, if you want to try it, before to execute `composer require` you have to clone the repository,
-and in your `composer.json` of your project file :
-```json lines
-    "repositories": [
-        {
-            "type": "path",
-            "url": "../lara-sock"
-        }
-    ]
-```
-and then, be sure that your minimum-stability, in the `composer.json` of your Laravel project is set to `dev`:
-```json lines
-    "minimum-stability": "dev",
-    "prefer-stable": true,
-```
 
 ## Starting the server
 
@@ -75,6 +60,15 @@ you have to "bind" to 0.0.0.0 ip address:
 
 ```shell
 php artisan larasock:start --host=0.0.0.0
+```
+
+If you have Tmux installed you can use it for starting Octane Web server and the WebSocket server in the same screen.
+```shell
+tmux \
+    new-session  'php artisan octane:start' \; \
+    split-window 'php artisan larasock:start --logchannel=stderr' \; \
+    detach-client
+tmux a
 ```
 ### The client
 Once you started the Web Socket Server, you can start creating your Web client to send and receive messages.

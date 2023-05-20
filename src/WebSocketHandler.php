@@ -4,9 +4,9 @@ namespace HiFolks\LaraSock;
 
 use HiFolks\LaraSock\Contracts\WebSocketHandlerInterface;
 use HiFolks\LaraSock\Objects\Channels;
-use Swoole\Http\Request;
-use Swoole\WebSocket\Frame;
-use Swoole\WebSocket\Server;
+use OpenSwoole\Http\Request;
+use OpenSwoole\WebSocket\Frame;
+use OpenSwoole\WebSocket\Server;
 
 //use OpenSwoole\WebSocket\Server;
 
@@ -37,7 +37,7 @@ class WebSocketHandler implements WebSocketHandlerInterface
     public function onStart(Server $server): void
     {
         $this->logger->info(__METHOD__);
-        $server->tick(10_000, function (): void {
+        \OpenSwoole\Timer::tick(10_000, function (): void {
             $this->logger->info('Memory usage: '.memory_get_usage());
         });
     }

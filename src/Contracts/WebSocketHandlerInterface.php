@@ -2,9 +2,9 @@
 
 namespace HiFolks\LaraSock\Contracts;
 
-use Swoole\Http\Request;
-use Swoole\WebSocket\Frame;
-use Swoole\WebSocket\Server;
+use OpenSwoole\Http\Request;
+use OpenSwoole\WebSocket\Frame;
+use OpenSwoole\WebSocket\Server;
 
 interface WebSocketHandlerInterface
 {

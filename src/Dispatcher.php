@@ -3,9 +3,11 @@
 namespace HiFolks\LaraSock;
 
 use HiFolks\LaraSock\Contracts\WebSocketHandlerInterface;
-use Swoole\Http\Request;
-use Swoole\WebSocket\Frame;
-use Swoole\WebSocket\Server;
+use OpenSwoole\Constant;
+use OpenSwoole\Http\Request;
+use OpenSwoole\Server as ServerAlias;
+use OpenSwoole\WebSocket\Frame;
+use OpenSwoole\WebSocket\Server;
 
 // use OpenSwoole\WebSocket\Server;
 
@@ -19,7 +21,7 @@ class Dispatcher
 
     public function __construct($host, $port)
     {
-        $this->server = new Server($host, $port, \SWOOLE_PROCESS, \SWOOLE_SOCK_TCP /*| \SWOOLE_SSL */);
+        $this->server = new Server($host, $port, ServerAlias::SIMPLE_MODE, Constant::SOCK_TCP);
     }
 
     public function setWebSocketHandler(WebSocketHandlerInterface $handler): void

@@ -18,7 +18,9 @@ class LaraSockServiceProvider extends ServiceProvider
 
         AboutCommand::add('LaraSock',
             fn (): array => [
-                'Version' => \Composer\InstalledVersions::getPrettyVersion('hi-folks/lara-sock'),
+                'Version' => \Composer\InstalledVersions::getPrettyVersion(
+                    'hi-folks/lara-sock'
+                ),
                 'WebSocket engine' => $engine,
             ]);
 

@@ -7,6 +7,7 @@ use HiFolks\LaraSock\WebSocketHandler;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
+use OpenSwoole\Exception as OsException;
 
 class LaraSockCommand extends Command
 {
@@ -53,14 +54,20 @@ class LaraSockCommand extends Command
             \Composer\InstalledVersions::getPrettyVersion('hi-folks/lara-sock').' </>');
         $this->line('<fg=gray> '.
             $this->getDescription().' </>');
-        $dispatcher = new Dispatcher($host, $port);
-        $dispatcher->setCompression();
+        try {
+            $dispatcher = new Dispatcher($host, $port);
+            $dispatcher->setCompression();
+            $logChannel = Log::channel($this->getLogChannel());
+            $handler = new WebSocketHandler();
+            $handler->setLogger($logChannel);
+            $dispatcher->setWebSocketHandler($handler);
+            $dispatcher->start();
+        } catch (OsException $e) {
+            $this->error('Error creating Web Socket : ');
+            $this->line('<fg=red> -> '.$e->getMessage().'</>');
 
-        $logChannel = Log::channel($this->getLogChannel());
-        $handler = new WebSocketHandler();
-        $handler->setLogger($logChannel);
-        $dispatcher->setWebSocketHandler($handler);
-        $dispatcher->start();
+            return self::FAILURE;
+        }
 
         return self::SUCCESS;
     }

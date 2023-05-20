@@ -9,16 +9,15 @@
 ![LaraSock](lara-sock.png)
 
 
-> This is an early stage (under costruction/exploration) work in progress, so at the moment, the project doens't implement
-> all the functionalities that you expect. If [you want to contribute](#contributing), providing Pull Request
->  providing suggestions, feel free to share. We believe in positive vibes.
+> This is an early stage (under construction/exploration) work in progress, so currently, the project only implements some of the functionalities you expect. Feel free to share if you [want to contribute](CONTRIBUTING.md), providing Pull Request or
+> suggestions. We believe in positive vibes.
 
 
 ## Why LaraSock?
 
 Larasock implements a WebSocket Server based on Open Swoole.
 The final goal is to support the same Application Providers supported by Laravel Octane (Swoole and Roadrunner).
-This package aims to allow you to easily add realtime functionalities via WebSocket to your Octane application.
+This package lets you easily add real-time functionalities via WebSocket to your Laravel/Octane application.
 
 So, if you are already using Open Swoole with your Laravel Octane,
 you don't need additional services or external tools to enable the Web Socket functionalities.
@@ -26,8 +25,8 @@ you don't need additional services or external tools to enable the Web Socket fu
 
 ## Installing LaraSock
 
-The LaraSock `hi-folks/lara-sock` is provided as PHP package that you can install in your Laravel project.
-To install the package you can use `composer require`:
+The LaraSock `hi-folks/lara-sock` is provided as a PHP package that you can install in your Laravel project.
+To install the package, you can use `composer require` command:
 
 ```bash
 composer require hi-folks/lara-sock
@@ -36,7 +35,7 @@ composer require hi-folks/lara-sock
 
 ## Starting the server
 
-Installing the package in your Laravel project, adds a new command in `php artisan`.
+Installing the package in your Laravel project adds a new command with `php artisan`.
 The new `larasock:start` artisan command starts a long live running process that starts a Web Socket server, ready to listen and accept your Web Socket connection from clients.
 
 ```bash
@@ -45,24 +44,24 @@ php artisan larasock:start
 
 ### Options
 
-With the command you can use some options:
+With the command, you can use some options:
 
 ```
 --host[=HOST]     The IP address the server should bind to [default: "127.0.0.1"]
 --port[=PORT]     The port the server should be available on [default: "9501"]
 ```
-The default host is 127.0.0.1, it means that
-can receive connection from localhost clients.
-The default port is 9501
+The default host is `127.0.0.1`, which means that
+it can receive connections from localhost clients.
+The default port is `9501`.
 
-If you want to accept connection from all the clients on the network,
-you have to "bind" to 0.0.0.0 ip address:
+If you want to accept connections from all the clients on the network,
+you have to "bind" to `0.0.0.0` IP address:
 
 ```shell
 php artisan larasock:start --host=0.0.0.0
 ```
 
-If you have Tmux installed you can use it for starting Octane Web server and the WebSocket server in the same screen.
+If you have Tmux installed, you can use it to start the Octane Web server and the WebSocket server on the same screen.
 ```shell
 tmux \
     new-session  'php artisan octane:start' \; \
@@ -71,8 +70,8 @@ tmux \
 tmux a
 ```
 ### The client
-Once you started the Web Socket Server, you can start creating your Web client to send and receive messages.
-To do that you can implement your HTML page and using Websocket Javascript class.
+Once you start the Web Socket Server, you can create your Web client to send and receive messages.
+You can implement your HTML page using the WebSocket Javascript class.
 
 ```html
 
@@ -137,21 +136,21 @@ To do that you can implement your HTML page and using Websocket Javascript class
 ```
 ## A note about the Subprotocol
 
-WebSocket defines a protocol that allows clients and server to exchange data (messages).
-A **Sub**-protocol defines the structure of the exchanged message and the meanings of each field. For example, you want to exchange a pure string with the text message without any additional information. Or you want to exchange data in with a more complex.
+WebSocket defines a protocol that allows clients and servers to exchange data (messages).
+A **Sub**-protocol defines the exchange message's structure and the meanings of each field. For example, you want to exchange a pure string with a text message without additional information. Or you want to exchange data with a more complex structure.
 
-At the moment the current implementation of this Proof of Concept exchange messages in string format.
+The current implementation of this Proof of Concept exchanges messages in string format.
 
 
-## Next Step, evolution of the Proof of Concept
+## Next Step, the evolution of the Proof of Concept
 
-This is just a Proof of Concept the thing that I would like to focus one (and feel free to share any suggestion/feedback/pullrequest):
+This is just a Proof of Concept, the thing that I would like to focus on (and feel free to share any suggestion/feedback/pull request):
 
 - Define the structure of the message
-- allow to customize the broadcast method
+- Allow customising the broadcast method
 - Rest API for showing statistics
 
-The package is under construction, so if you have some suggestion you can:
+The package is under construction, so if you have some suggestions, you can:
 - [Write a Feature request](https://github.com/Hi-Folks/lara-sock/issues/new?labels=feature-request&title=%5BFeature+Request%5D%3A++)
 - [Submit a Pull Request](https://github.com/Hi-Folks/lara-sock/pulls)
 - [Write me on Twitter](https://twitter.com/RmeetsH)
@@ -160,9 +159,9 @@ The package is under construction, so if you have some suggestion you can:
 
 Please see [CONTRIBUTING](CONTRIBUTING.md) for details.
 
-### Submit ideas or feature requests or issues
+### Submit ideas or feature requests, or issues
 
-The package is under construction, so if you have some suggestion you can:
+The package is under construction, so if you have some suggestions, you can:
 
 * Take a look if your request is already there [https://github.com/Hi-Folks/lara-sock/issues](https://github.com/Hi-Folks/lara-sock/issues)
 * If it is not present, you can create a new [feature request](https://github.com/Hi-Folks/lara-sock/issues/new?labels=feature-request&title=%5BFeature+Request%5D%3A++)

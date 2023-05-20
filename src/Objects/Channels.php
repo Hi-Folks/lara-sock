@@ -6,7 +6,7 @@ use Illuminate\Support\Arr;
 
 class Channels
 {
-    final const DEFAULT_CHANNEL_NAME = 'default';
+    final public const DEFAULT_CHANNEL_NAME = 'default';
 
     private array $channels = [];
 
@@ -39,7 +39,10 @@ class Channels
         return $this->getChannel($channelName)->count();
     }
 
-    public function addSubscriber(int $fd, $channelName = self::DEFAULT_CHANNEL_NAME)
+    /**
+     * @return array{fd: int, name: string}
+     */
+    public function addSubscriber(int $fd, $channelName = self::DEFAULT_CHANNEL_NAME): array
     {
         $clientName = sprintf("Client-%'.06d\n", $fd);
         $data = [
@@ -51,7 +54,7 @@ class Channels
         return $data;
     }
 
-    public function removeSubscriber(int $fd, $channelName = self::DEFAULT_CHANNEL_NAME)
+    public function removeSubscriber(int $fd, $channelName = self::DEFAULT_CHANNEL_NAME): void
     {
         $this->channels[$channelName]->del($fd);
     }

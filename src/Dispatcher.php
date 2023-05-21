@@ -9,8 +9,6 @@ use OpenSwoole\Server as ServerAlias;
 use OpenSwoole\WebSocket\Frame;
 use OpenSwoole\WebSocket\Server;
 
-// use OpenSwoole\WebSocket\Server;
-
 class Dispatcher
 {
     private readonly Server $server;

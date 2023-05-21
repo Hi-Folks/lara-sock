@@ -8,8 +8,6 @@ use OpenSwoole\Http\Request;
 use OpenSwoole\WebSocket\Frame;
 use OpenSwoole\WebSocket\Server;
 
-//use OpenSwoole\WebSocket\Server;
-
 class WebSocketHandler implements WebSocketHandlerInterface
 {
     private $logger;
@@ -46,13 +44,13 @@ class WebSocketHandler implements WebSocketHandlerInterface
     {
         $opcode = $frame->opcode;
         switch ($opcode) {
-            case 0x10:
+            case Server::WEBSOCKET_OPCODE_PONG:
                 $this->logger->info("PONG frame , opcode ${opcode}, ");
                 break;
-            case 0x08: // WEBSOCKET_OPCODE_CLOSE
+            case Server::WEBSOCKET_OPCODE_CLOSE:
                 $this->logger->info("CLOSE frame , opcode ${opcode}, ");
                 break;
-            case 0x09: // WEBSOCKET_OPCODE_PING
+            case Server::WEBSOCKET_OPCODE_PING:
                 $this->logger->info("PING frame , opcode ${opcode}, ");
                 $this->sendPong($server, $frame->fd);
                 break;
@@ -95,7 +93,8 @@ class WebSocketHandler implements WebSocketHandlerInterface
     private function sendPong(Server $server, int $fd): void
     {
         $pongFrame = new Frame;
-        $pongFrame->opcode = \WEBSOCKET_OPCODE_PONG;
+
+        $pongFrame->opcode = Server::WEBSOCKET_OPCODE_PONG;
 
         // Push response of pong to client using a frame object
         $server->push($fd, $pongFrame);

@@ -1,6 +1,6 @@
 {
   "name": "hi-folks/lara-sock",
-  "description": "WebSocket package for Laravel application, using Swoole or Open Swoole server",
+  "description": "WebSocket package for Laravel application, using Open Swoole server",
   "keywords": [
     "laravel",
     "lara-sock",
@@ -14,7 +14,6 @@
   "authors": [
     {
       "name": "Roberto Butti",
-      "email": "roberto.butti@gmail.com",
       "role": "Developer"
     }
   ],
@@ -44,11 +43,12 @@
   "scripts": {
     "post-autoload-dump": "@php ./vendor/bin/testbench package:discover --ansi",
     "all":
-            [ "@analyse", "@format", "@test" ],
-    "analyse": "vendor/bin/phpstan analyse",
-    "test": "vendor/bin/pest",
-    "test-coverage": "vendor/bin/pest --coverage",
-    "format": "vendor/bin/pint"
+            [ "@analyse", "@rector","@format", "@test" ],
+    "analyse": "phpstan analyse",
+    "test": "pest",
+    "test-coverage": "pest --coverage",
+    "format": "pint",
+    "rector": "rector process --dry-run"
   },
   "config": {
     "sort-packages": true,
